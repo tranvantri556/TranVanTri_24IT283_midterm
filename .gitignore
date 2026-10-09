@@ -1,0 +1,5 @@
+*.o
+myls
+*.out
+*.dSYM/
+.DS_Store
