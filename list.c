@@ -14,6 +14,8 @@
 
 static Options *g_opts = NULL;
 
+int g_exit_code = 0;
+
 static int cmp_lex(const void *a, const void *b) {
     const FileInfo *fa = (const FileInfo *)a;
     const FileInfo *fb = (const FileInfo *)b;
@@ -252,6 +254,7 @@ static void list_dir(const char *path, Options *opts,
     DIR *dir = opendir(path);
     if (!dir) {
         fprintf(stderr, "ls: %s: %s\n", path, strerror(errno));
+	g_exit_code = 1;
         return;
     }
 
@@ -324,7 +327,8 @@ void list_main(Options *opts, int num_operands, char **operands) {
             } else {
                 fprintf(stderr, "ls: %s: %s\n",
                         path, strerror(errno));
-            }
+		g_exit_code = 1;        
+    	    }
         } else {
             if (stat(path, &st) == 0 && S_ISDIR(st.st_mode)) {
                 fl_add(&dirs, path, path, &st, true);
@@ -335,7 +339,8 @@ void list_main(Options *opts, int num_operands, char **operands) {
                 } else {
                     fprintf(stderr, "ls: %s: %s\n",
                             path, strerror(errno));
-                }
+		    g_exit_code = 1;                
+		}
             }
         }
     }

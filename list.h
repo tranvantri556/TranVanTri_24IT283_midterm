@@ -20,6 +20,8 @@ typedef struct {
     size_t cap;
 } FileList;
 
+extern int g_exit_code;
+
 void list_main(Options *opts, int num_operands, char **operands);
 
 void fl_init(FileList *fl);

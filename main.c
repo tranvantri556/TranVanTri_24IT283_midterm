@@ -15,5 +15,5 @@ int main(int argc, char **argv) {
 
     list_main(&opts, argc - first_operand, argv + first_operand);
 
-    return 0;
+    return g_exit_code;
 }
